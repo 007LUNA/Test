@@ -1,0 +1,20 @@
+name: deploy test
+on:
+  push:
+    branches:
+    - master
+jobs:
+  deployment:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4.2.2
+      - name: SSH Remote Commands
+        uses: appleboy/ssh-action@v1.1.0
+        with:
+          host: $ {{secrets.HOST}}
+          username: $ {{secrets.USERNAME}}
+          key: $ {{secrets.KEY}}
+          Script: "cd /home/ubuntu/pt && ./deploy.sh"
+            
+      
